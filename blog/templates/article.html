@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content%}
+
+    <div>
+        <h2>
+            {{ article.title }}
+        </h2>
+        <h4> By: {{article.author}}</h4>
+        <p>{{ article.body|linebreaksbr }}</p>
+        <p>{{ article.published_date}}</p>
+    </div>
+    <h4>
+    <a href="{% url 'edit' id=article.pk %}">EDIT</a>
+    </h4>
+    <div class="comment_section">
+        <ul>
+                {% for comment in article.comments.all %}
+                    <li>
+                        <div>
+                        <h4>{{ comment.name }}</h4>
+                        <p>{{ comment.message }}</p>
+                        <p>{{ comment.created_at }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+        </li>
+        <form action="{% url 'create_comment' %}" method="POST">
+            {% csrf_token %}
+        <input type="hidden" name="article" value="{{ article.pk }}">
+                {{ form.as_p }}
+        <input type="submit" value="Submit" >
+        </form>
+    </div>
+
+{% endblock %}

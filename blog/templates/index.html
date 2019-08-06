@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content%}
+    <h1>This is a Blog</h1>
+    <h2>Todays date is {{date}}</h2>
+    {% for article in articles%}
+    {% if article.draft == False %}
+    <div style='border: 2px solid black; margin: 1em; padding:0.5em; width: 80%'>
+        <h2>
+            <a href="{% url 'full_article' id=article.pk %}">{{ article.title }}</a> 
+        </h2>
+        <h4> By: {{article.author}}</h4>
+        <p>{{ article.body|linebreaksbr }}</p>
+        <p>{{ article.published_date}}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

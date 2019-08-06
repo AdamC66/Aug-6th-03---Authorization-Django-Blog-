@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssnormalize/cssnormalize-min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+        <!-- display link to log out -->
+        <a href="{% url 'logout' %}"> Logout Here </a>
+    {% else %}
+        <!-- display link to login page -->
+        <p><a href="{% url 'login' %}"> Login Here </a></p>
+    {% endif %}
+
+    <p><a href="{% url 'new_article' %}">Submit new article</a></p>
+
+    {% block content%}
+    {% endblock %}
+</body> 
+</html>
